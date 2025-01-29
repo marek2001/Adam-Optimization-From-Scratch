@@ -36,7 +36,7 @@ class CustomAdam(Optimizer):
         loss = None
         # Jeśli podano closure, przypisanie wartości straty do wyniku closure
         loss = closure() if closure != None else loss
-        # Sprawdzenie, czy jest to pierwszy krok - jeśli tak, ustawienie wartości na 1, w przeciwnym razie inkrementacja
+        # Sprawdzenie, czy jest to pierwszy krok — jeśli tak, ustawienie wartości na 1, w przeciwnym razie inkrementacja
         if not self.state["step"]:
             self.state["step"] = 1
         else:
@@ -45,13 +45,13 @@ class CustomAdam(Optimizer):
         for param_group in self.param_groups:
             # Iteracja po poszczególnych parametrach
             for param in param_group["params"]:
-                # Sprawdzenie, czy dla danego parametru obliczono gradient
-                # Jeśli gradienty nie są dostępne - pomijamy ten parametr
+                # Sprawdzenie, czy dla danego parametru obliczono gradient,
+                # Jeśli gradienty nie są dostępne — pomijamy ten parametr
                 if param.grad.data == None:
                     continue
                 else:
                     gradients = param.grad.data
-                # Zastosowanie metody Adam - na pierwszym kroku inicjalizacja wymaganych wartości dla danego parametru
+                # Zastosowanie metody Adam — na pierwszym kroku inicjalizacja wymaganych wartości dla danego parametru
                 if self.state["step"] == 1:
                     # Ustawienie pierwszego i drugiego momentu na wektory zerowe
                     self.state["first_moment_estimate"] = torch.zeros_like(param.data)
